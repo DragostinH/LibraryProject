@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gentium+Book+Basic:wght@400;700&family=Lobster+Two:wght@400;700&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Gentium+Book+Basic:wght@400;700&family=Lobster+Two:wght@400;700&display=swap"
         rel="stylesheet">
 </head>
 
@@ -21,77 +22,42 @@
         </header>
 
         <section class="content-section">
-            <!--
-            <div class="card-example">
-                <p>Book name</p>
-                <p>Book Author</p>
-                <p>Pages</p>
-                <p>Finished?</p>
-                <button>EDIT</button>
-                <button>REMOVE</button>
-            </div>
-            <div class="card-example">
-                <p>Book name</p>
-                <p>Book Author</p>
-                <p>Pages</p>
-                <p>Finished?</p>
-                <button>EDIT</button>
-                <button>REMOVE</button>
-            </div>
-            <div class="card-example">
-                <p>Book name</p>
-                <p>Book Author</p>
-                <p>Pages</p>
-                <p>Finished?</p>
-                <button>EDIT</button>
-                <button>REMOVE</button>
-            </div>
-            <div class="card-example">
-                <p>Book name</p>
-                <p>Book Author</p>
-                <p>Pages</p>
-                <p>Finished?</p>
-                <button>EDIT</button>
-                <button>REMOVE</button>
-            </div>
-            <div class="card-example">
-                <p>Book name</p>
-                <p>Book Author</p>
-                <p>Pages</p>
-                <p>Finished?</p>
-                <button>EDIT</button>
-                <button>REMOVE</button>
-            </div>
-            <div class="card-example">
-                <p>Book name</p>
-                <p>Book Author</p>
-                <p>Pages</p>
-                <p>Finished?</p>
-                <button>EDIT</button>
-                <button>REMOVE</button>
-            </div>
-            <div class="card-example">
-                <p>Book name</p>
-                <p>Book Author</p>
-                <p>Pages</p>
-                <p>Finished?</p>
-                <button>EDIT</button>
-                <button>REMOVE</button>
-            </div>
-            <div class="card-example">
-                <p>Book name</p>
-                <p>Book Author</p>
-                <p>Pages</p>
-                <p>Finished?</p>
-                <button>EDIT</button>
-                <button>REMOVE</button>
-            </div>
 
-        -->
-   
+
         </section>
+
+        <form action="#" class="new-book-form">
+            <div class="final-form">
+                <label for="book-name">
+                    <p>Book Title:</p>
+                    <input type="text" name="book-name" id="book-name" placeholder="E.g. 'The Lord Of The Rings' ">
+                </label>
+                <label for="book-author">
+                    <p>Book Author:</p>
+                     <input type="text" name="book-author" id="book-author"
+                        placeholder="E.g. 'J.R.R. Tolkein'" required>
+                </label>
+
+                <label for="book-pages">
+                    <p>Pages</p>
+                    <input type="number" name="book-pages" id="book-pages" required>
+                </label>
+
+                <label for="finised">
+                    Complete
+                    <input type="checkbox" name="finished" id="finished" required>
+                </label>
+
+                <div class="bottom-buttons">
+                    <button class="add-button">ADD</button>
+                    <button class="cancel-button">CANCEL</button>
+
+                </div>
+            </div>
+        </form>
+
         <div class="add-new-book-container">
-            <button>ADD NEW BOOK</button>
+            <button class="show-form-button">ADD NEW BOOK</button>
         </div>
 
     </div>

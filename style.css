@@ -12,6 +12,7 @@ body {
     height: 100vh;
     width: 100vw;
     margin: 0;
+    background-color: #FFE6BC;
 
 
 }
@@ -36,6 +37,48 @@ body {
     border: 1px solid red;
     margin: 1em;
 
+}
+
+.new-book-form{
+    display: none;
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    /* opacity: */
+    background-color: rgba(0, 0, 0, 0.8);
+    /* top: 10em;
+    position: sticky; */
+    border: 1px solid black;
+    height: 100vh;
+    width: 100vw
+}
+
+.final-form{
+    background-color: #E4CDA7;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 50%;
+    border: 1px solid black;
+    flex-wrap: wrap;
+}
+
+
+#book-name,
+#book-author,
+#book-pages{
+    width: 400px;
+}
+
+.final-form input{
+    font-size: 24px;
+    border-radius: 5px;
+    border: none;
+    /* height: 3em; */
 }
 
 
