@@ -1,4 +1,6 @@
 let localLibrary = [];
+let dynamicLibrary = [];
+// let dynamicArrayOfBooks = Array.from(nodeListOfBooks);
 const contentSection = document.querySelector('.content-section');
 
 const newBookForm = document.querySelector('.new-book-form');
@@ -19,30 +21,27 @@ showFormButton.addEventListener('click', () => {
     showForm(newBookForm);
 })
 
-addBookButton.addEventListener('click', () => {
-    let testBook1 = new Book(bookTitleField.value,
-        bookAuthorField.value, bookPages.value, formCheckbox.checked);
-
-    localLibrary.push(testBook1);
-
-    for (const book of localLibrary) {
-        contentSection.appendChild(createBookCard(testBook1));
-    }
-    console.table(localLibrary);
-    console.log(bookTitleField.value);
-    console.log(bookAuthorField.value);
-    console.log(bookPages.value);
-    console.log(formCheckbox.checked);
-
-    hideForm(newBookForm);
-
-})
-
-
 cancelFormButton.addEventListener('click', () => {
     hideForm(newBookForm);
 })
 
+// Add button from the form
+addBookButton.addEventListener('click', () => {
+    let newBook = new Book(bookTitleField.value,
+        bookAuthorField.value, bookPages.value, formCheckbox.checked);
+    let cardDiv = createBookCard(newBook);
+    let removeButton = cardDiv.querySelector('#remove-book-button');
+    removeButton.addEventListener('click', ()=>{
+        console.log(removeButton.textContent);
+    });
+    addBookToLibrary(localLibrary, cardDiv);
+    hideForm(newBookForm);
+    contentSection.appendChild(createBookCard(newBook));
+
+})
+
+
+// REMOVE BOOK button from the book card element
 // let testBook2 = new Book('Book Name 2', 'Author Any2', 400, true);
 // let testBook3 = new Book('Book Name 3', 'Author Any3', 300, false);
 // let testBook4 = new Book('Book Name 4', 'Author Any4', 600, true);
@@ -79,7 +78,15 @@ cancelFormButton.addEventListener('click', () => {
 
 
 
+// Function for adding book to library
+function addBookToLibrary(library, book) {
+    library.push(book);
+}
 
+// Function for removing item from list
+function removeBookFromArray(library, index){
+    library.splice(index, 1);
+}
 // Function to cancel form
 function hideForm(element) {
     element.style.display = 'none';
@@ -92,14 +99,22 @@ function showForm(element) {
 
 // Function for creating the book card element
 function createBookCard(book) {
+
     let cardContainer = document.createElement('div');
+
     let bookTitle = document.createElement('p');
     let bookAuthor = document.createElement('p');
     let bookPages = document.createElement('p');
+
     let bookFinished = document.createElement('input');
     bookFinished.type = "checkbox";
+    bookFinished.classList.add = 'finished-checkbox';
+
     let editButton = document.createElement('button');
+    editButton.id = 'edit-book-button';
+
     let removeButton = document.createElement('button');
+    removeButton.id = 'remove-book-button';
 
     cardContainer.appendChild(bookTitle);
     cardContainer.appendChild(bookAuthor);
@@ -112,32 +127,32 @@ function createBookCard(book) {
     bookTitle.textContent = book.name;
     bookAuthor.textContent = book.author;
     bookPages.textContent = book.pages;
+    bookFinished.checked = book.finished;
     editButton.textContent = 'EDIT';
     removeButton.textContent = 'REMOVE BOOK';
+
+
 
     return cardContainer;
 }
 
 // Book constructor function
-function Book(name, author, pages, finished) {
-    this.name = name;
-    this.author = author;
-    this.pages = pages;
-    this.finished = finished;
-
-
-}
-
-Book.prototype.info = () => {
-    console.log(`this.name\n
+class Book {
+    constructor(name, author, pages, finished) {
+        this.name = name;
+        this.author = author;
+        this.pages = pages;
+        this.finished = finished;
+    }
+    info() {
+        console.log(`this.name\n
     this.author\n
     this.pages\n
-    this.finished\n`)
+    this.finished\n`);
+    }
 }
 
-Book.prototype.addBookToLibrary = (library, book) => {
-    library.push(this.book);
-}
+
 
 
 
