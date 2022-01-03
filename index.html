@@ -26,11 +26,11 @@
 
         </section>
 
-        <form action="#" class="new-book-form">
+        <form action="" class="new-book-form" onsubmit="return false">
             <div class="final-form">
                 <label for="book-name">
                     <p>Book Title:</p> 
-                    <input type="text" name="book-name" id="book-name" placeholder="E.g. 'The Lord Of The Rings' ">
+                    <input type="text" name="book-name" id="book-name" placeholder="E.g. 'The Lord Of The Rings' " required>
                 </label>
                 <label for="book-author">
                     <p>Book Author:</p>
@@ -43,15 +43,14 @@
                     <input type="number" name="book-pages" id="book-pages" required>
                 </label>
 
-                <label for="finised">
-                    Complete
+                <label for="">
+                    Finished
                     <input type="checkbox" name="finished" id="finished" required>
                 </label>
 
                 <div class="bottom-buttons">
                     <button class="add-button">ADD</button>
                     <button class="cancel-button">CANCEL</button>
-
                 </div>
             </div>
         </form>
