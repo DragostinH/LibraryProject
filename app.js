@@ -7,7 +7,10 @@ let addBookButton = document.querySelector('.add-button');
 const bookTitleField = document.querySelector('#book-name');
 const bookAuthorField = document.querySelector('#book-author');
 const bookPages = document.querySelector('#book-pages');
-const formCheckbox = document.querySelector('#finished');
+// const formCheckbox = document.querySelector('#finished');
+const dropDown = document.querySelector('#read-status');
+
+console.log(dropDown.children);
 
 
 
@@ -37,8 +40,10 @@ bookPages.addEventListener('keyup', () => {
 
 // Add book button from the form
 addBookButton.addEventListener('click', () => {
+    console.log(`This is the value from the dropdown ${dropDown.value}`);
     let newBook = new Book(bookTitleField.value,
-        bookAuthorField.value, bookPages.value, formCheckbox.checked);
+        bookAuthorField.value, bookPages.value, dropDown.value);
+
     let cardDiv = createBookCardDiv(newBook);
     // localLibrary.push(cardDiv);
 
@@ -103,15 +108,15 @@ function createBookCardDiv(book) {
     let bookTitle = createTitle(book);
     let bookAuthor = createAuthor(book);
     let bookPages = createBookPages(book);
-    let bookChecked = createBookFinishedCheckbox(book);
-    let editButton = createEditButton(cardContainer);
+    let bookSelectDropdown = createSelectList(book);
+    // let editButton = createEditButton(cardContainer);
     let removeButton = createRemoveButton(cardContainer);
 
     cardContainer.appendChild(bookTitle);
     cardContainer.appendChild(bookAuthor);
     cardContainer.appendChild(bookPages);
-    cardContainer.appendChild(bookChecked);
-    cardContainer.appendChild(editButton);
+    cardContainer.appendChild(bookSelectDropdown);
+    // cardContainer.appendChild(editButton);
     cardContainer.appendChild(removeButton);
 
 
@@ -140,13 +145,47 @@ function createBookPages(param) {
 }
 
 
-function createBookFinishedCheckbox(param) {
-    let bookFinished = document.createElement('input');
-    bookFinished.type = "checkbox";
-    bookFinished.classList.add = 'finished-checkbox';
-    bookFinished.checked = param.finished;
+function createSelectList(param) {
+    let select = document.createElement('SELECT');
+    let option1 = document.createElement('option');
+    let option2 = document.createElement('option');
+    let option3 = document.createElement('option');
+    let option4 = document.createElement('option');
 
-    return bookFinished;
+    option1.value = 'complete';
+    option1.text = 'Complete'
+
+    option2.value = 'reading';
+    option2.text = 'Reading';
+
+    option3.value = 'on-hold';
+    option3.text = 'On-hold';
+
+    option4.value = 'dropped';
+    option4.text = 'Dropped';
+
+    select.add(option1, null)
+    select.add(option2, null)
+    select.add(option3, null)
+    select.add(option4, null)
+
+    
+
+    for (let i = 0; i < select.options.length; i++) {
+        let currOption = select.options[i];
+        console.log(currOption);
+
+        if(currOption.value === param.status){
+            select.options[i].selected = true;
+            return select;
+        }
+        
+    }
+    console.log(select.options);
+
+    // select.innerText = param.status;
+
+    return select;
 
 }
 
@@ -191,11 +230,11 @@ function createRemoveButton(param) {
 
 // Book constructor function
 class Book {
-    constructor(name, author, pages, finished) {
+    constructor(name, author, pages, status) {
         this.name = name;
         this.author = author;
         this.pages = pages;
-        this.finished = finished;
+        this.status = status;
     }
     info() {
         console.log(`this.name\n

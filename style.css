@@ -5,6 +5,14 @@
     font-family: 'Gentium Book Basic', serif;
 }
 
+:root {
+    --midnight-blue: #41729F;
+    --blue-gray: #5885AF;
+    --dark-blue: #274472;
+    --baby-blue: #C3E0E5;
+
+}
+
 body {
     /* background-image: url(./imgs/BookShop.jpg);
     background-size: cover;
@@ -12,7 +20,7 @@ body {
     height: 100vh;
     width: 100vw;
     margin: 0;
-    background-color: #FFE6BC;
+    background-color: var(--baby-blue);
 
 
 }
@@ -21,7 +29,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #8E806A
+    background-color: var(--blue-gray);
 }
 
 .content-section {
@@ -39,7 +47,7 @@ body {
 
 }
 
-.new-book-form{
+.new-book-form {
     display: none;
     /* display: flex; */
     align-items: center;
@@ -55,30 +63,55 @@ body {
     width: 100vw
 }
 
-.final-form{
-    background-color: #E4CDA7;
+.final-form {
+    background-color: var(--dark-blue);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 50%;
-    height: 50%;
-    border: 1px solid black;
-    flex-wrap: wrap;
+    color: var(--baby-blue);
+    border-radius: 5px;
+    box-shadow: 0 0 5px;
+}
+
+.form-title {
+    font-style: italic;
+    margin: 1em;
+    padding: 0;
 }
 
 
 #book-name,
 #book-author,
-#book-pages{
-    width: 400px;
+#book-pages,
+#read-status {
+    /* top right bottom left */
+    /* margin: 0.5em 1em 0.5em 1em; */
+    padding: 0.25em;
+    width: 350px;
 }
 
-.final-form input{
+.final-form input, 
+#read-status,
+.bottom-buttons button {
     font-size: 24px;
     border-radius: 5px;
     border: none;
-    /* height: 3em; */
+    color: var(--dark-blue)
+}
+
+.final-form p,
+.final-form input,
+#read-status,
+.bottom-buttons button {
+    margin: 0.25em 1em 0.5em 1em;
+}
+
+
+
+.bottom-buttons button{
+    padding: 0.5em 1em 0.5em 1em;
+    border: 2px solid var(--blue-gray);
 }
 
 
@@ -90,5 +123,12 @@ h1 {
     width: 100%;
     text-align: center;
     margin: 0;
-    background-color: #C3B091;
+    background-color: var(--midnight-blue)
+}
+
+
+.bottom-buttons button:hover{
+    background-color: var(--blue-gray);
+    color: var(--baby-blue);    
+    border: 2px solid white;
 }
