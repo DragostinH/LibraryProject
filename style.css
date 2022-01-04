@@ -10,7 +10,10 @@
     --blue-gray: #5885AF;
     --dark-blue: #274472;
     --baby-blue: #C3E0E5;
-
+    --complete-book: #499f41;
+    --on-hold-book: #8e9f41;
+    --reading-book: #419f7b;
+    --dropped-book: #9f4141;
 }
 
 body {
@@ -34,18 +37,64 @@ body {
 
 .content-section {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    /* align-items: center; */
+    /* justify-content: space-around */
     flex-wrap: wrap;
-    width: 50%;
+    height: 100vh;
+    width: 75%;
+    border-radius: 5px;
+}
+
+.content-section div{
+    display: flex;
+    flex-direction: column;
     border: 2px solid white;
-}
-
-.card-example {
-    border: 1px solid red;
     margin: 1em;
-
+    
+    height: 300px;
 }
+
+.content-section p{
+    margin: 0.5em;
+}
+
+.content-section button{
+    
+}
+
+
+.complete-book{
+    color: white;
+    background-color: var(--complete-book);
+}
+
+.on-hold-book{
+    color: white;
+
+    background-color: var(--on-hold-book);
+}
+
+.reading-book{
+    color: white;
+
+    background-color: var(--reading-book);
+}
+
+.dropped-book{
+    color: white;
+    background-color: var(--dropped-book);
+}
+
+/* .complete-book,
+.on-hold-book,
+.reading-book,
+.dropped-book{
+    
+    width: 250px;
+    height: 150px; 
+}
+    */
+
 
 .new-book-form {
     display: none;
@@ -91,7 +140,7 @@ body {
     width: 350px;
 }
 
-.final-form input, 
+.final-form input,
 #read-status,
 .bottom-buttons button {
     font-size: 24px;
@@ -109,12 +158,28 @@ body {
 
 
 
-.bottom-buttons button{
+.bottom-buttons button {
     padding: 0.5em 1em 0.5em 1em;
     border: 2px solid var(--blue-gray);
 }
 
 
+.add-new-book-container{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0 1em 1em 0;
+}
+
+.show-form-button{
+    background-color: var(--blue-gray);
+    color: var(--baby-blue);
+    font-size: 48px;
+    height: 100px;
+    width: 100px;
+    border: 2px solid var(--dark-blue);
+    border-radius: 50%;
+}
 
 
 
@@ -127,8 +192,8 @@ h1 {
 }
 
 
-.bottom-buttons button:hover{
+.bottom-buttons button:hover {
     background-color: var(--blue-gray);
-    color: var(--baby-blue);    
+    color: var(--baby-blue);
     border: 2px solid white;
 }

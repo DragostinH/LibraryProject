@@ -24,7 +24,7 @@ cancelFormButton.addEventListener('click', () => {
     hideForm(newBookForm);
 })
 
-// Keyboard events
+// Keyboard events for form
 bookTitleField.addEventListener('keyup', () => {
     checkFieldContent(bookTitleField, bookAuthorField, bookPages, addBookButton);
 
@@ -43,17 +43,13 @@ addBookButton.addEventListener('click', () => {
     console.log(`This is the value from the dropdown ${dropDown.value}`);
     let newBook = new Book(bookTitleField.value,
         bookAuthorField.value, bookPages.value, dropDown.value);
-
     let cardDiv = createBookCardDiv(newBook);
-    // localLibrary.push(cardDiv);
-
+    setInitialBackgroundColor(cardDiv);
     addBookToLibrary(localLibrary, cardDiv);
-    // hideForm(newBookForm);
     for (const item of localLibrary) {
         contentSection.appendChild(item);
 
     }
-
 })
 
 
@@ -63,7 +59,6 @@ addBookButton.addEventListener('click', () => {
 // Function for checking if fields have data
 
 function checkFieldContent(bookTitleField, bookAuthorField, bookPages, addButton) {
-    console.log(bookTitleField.value);
     if (bookTitleField.value && bookAuthorField.value && bookPages.value) {
         enableButton(addButton);
     }
@@ -98,12 +93,55 @@ function enableButton(button) {
     button.disabled = false;
 }
 
+function changeBackgroundDependingOnStatus(status) {
+    let divBackground = status.parentElement.parentElement;
+
+    switch (status.value) {
+
+        case "complete":
+        case "reading":
+        case "on-hold":
+        case "dropped":
+            divBackground.className = '';
+            divBackground.className = `${status.value}-book`;
+            break;
+    }
+}
+
+function setInitialBackgroundColor(param) {
+    let currentSelection = param.children[7].value;
+    console.log(currentSelection);
+    switch (currentSelection) {
+        case 'complete':
+        case 'reading':
+        case 'on-hold':
+        case 'dropped':
+            param.className = `${currentSelection}-book`;
+            break;
+    }
+}
+
 // Function for creating the book card container(div)
 function createBookCardDiv(book) {
+    let titleNotation = document.createElement('p');
+    titleNotation.innerText = 'Title:';
+
+    let authorNotation = document.createElement('p');
+    authorNotation.innerText = 'Author:';
+
+    let pagesNotation = document.createElement('p');
+    pagesNotation.innerText = 'Pages:';
+
+    let statusNotation =document.createElement('p');
+    statusNotation.innerText = 'Status:'
+
+
     let id = Math.floor(Math.random() * 2000000) + "";
     let cardContainer = document.createElement('div');
     cardContainer.id = id;
     cardContainer.classList.add('card-example');
+
+
 
     let bookTitle = createTitle(book);
     let bookAuthor = createAuthor(book);
@@ -112,9 +150,16 @@ function createBookCardDiv(book) {
     // let editButton = createEditButton(cardContainer);
     let removeButton = createRemoveButton(cardContainer);
 
+    cardContainer.appendChild(titleNotation);
     cardContainer.appendChild(bookTitle);
+
+    cardContainer.appendChild(authorNotation);
     cardContainer.appendChild(bookAuthor);
+
+    cardContainer.appendChild(pagesNotation);
     cardContainer.appendChild(bookPages);
+
+    cardContainer.appendChild(statusNotation);
     cardContainer.appendChild(bookSelectDropdown);
     // cardContainer.appendChild(editButton);
     cardContainer.appendChild(removeButton);
@@ -144,7 +189,6 @@ function createBookPages(param) {
 
 }
 
-
 function createSelectList(param) {
     let select = document.createElement('SELECT');
     let option1 = document.createElement('option');
@@ -164,29 +208,41 @@ function createSelectList(param) {
     option4.value = 'dropped';
     option4.text = 'Dropped';
 
+    option1.addEventListener('click', () => {
+        changeBackgroundDependingOnStatus(option1);
+
+    });
+    option2.addEventListener('click', () => {
+        changeBackgroundDependingOnStatus(option2);
+
+    });
+    option3.addEventListener('click', () => {
+        changeBackgroundDependingOnStatus(option3);
+
+    });
+    option4.addEventListener('click', () => {
+        changeBackgroundDependingOnStatus(option4);
+
+    });
+
     select.add(option1, null)
     select.add(option2, null)
     select.add(option3, null)
     select.add(option4, null)
 
-    
 
+
+    // Mirroring the dropdown selection from the form to after the card is created
     for (let i = 0; i < select.options.length; i++) {
         let currOption = select.options[i];
-        console.log(currOption);
-
-        if(currOption.value === param.status){
+        if (currOption.value === param.status) {
             select.options[i].selected = true;
             return select;
         }
-        
-    }
-    console.log(select.options);
 
-    // select.innerText = param.status;
+    }
 
     return select;
-
 }
 
 function createEditButton(param) {
@@ -201,7 +257,6 @@ function createEditButton(param) {
     return editButton;
 
 }
-
 
 function createRemoveButton(param) {
     let removeButton = document.createElement('button');
