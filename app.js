@@ -10,13 +10,11 @@ const bookPages = document.querySelector('#book-pages');
 // const formCheckbox = document.querySelector('#finished');
 const dropDown = document.querySelector('#read-status');
 
-console.log(dropDown.children);
 
 
 
 // Event listeners for buttons and form fields:
 showFormButton.addEventListener('click', () => {
-    console.log('CLICKED BUTTON');
     showForm(newBookForm, addBookButton);
 })
 
@@ -40,7 +38,6 @@ bookPages.addEventListener('keyup', () => {
 
 // Add book button from the form
 addBookButton.addEventListener('click', () => {
-    console.log(`This is the value from the dropdown ${dropDown.value}`);
     let newBook = new Book(bookTitleField.value,
         bookAuthorField.value, bookPages.value, dropDown.value);
     let cardDiv = createBookCardDiv(newBook);
@@ -50,6 +47,7 @@ addBookButton.addEventListener('click', () => {
         contentSection.appendChild(item);
 
     }
+
 })
 
 
@@ -94,7 +92,7 @@ function enableButton(button) {
 }
 
 function changeBackgroundDependingOnStatus(status) {
-    let divBackground = status.parentElement.parentElement;
+    let divBackground = status.parentElement;
 
     switch (status.value) {
 
@@ -110,7 +108,6 @@ function changeBackgroundDependingOnStatus(status) {
 
 function setInitialBackgroundColor(param) {
     let currentSelection = param.children[7].value;
-    console.log(currentSelection);
     switch (currentSelection) {
         case 'complete':
         case 'reading':
@@ -132,7 +129,7 @@ function createBookCardDiv(book) {
     let pagesNotation = document.createElement('p');
     pagesNotation.innerText = 'Pages:';
 
-    let statusNotation =document.createElement('p');
+    let statusNotation = document.createElement('p');
     statusNotation.innerText = 'Status:'
 
 
@@ -196,40 +193,29 @@ function createSelectList(param) {
     let option3 = document.createElement('option');
     let option4 = document.createElement('option');
 
+    
     option1.value = 'complete';
     option1.text = 'Complete'
-
+    
     option2.value = 'reading';
     option2.text = 'Reading';
-
+    
     option3.value = 'on-hold';
     option3.text = 'On-hold';
-
+    
     option4.value = 'dropped';
     option4.text = 'Dropped';
 
-    option1.addEventListener('click', () => {
-        changeBackgroundDependingOnStatus(option1);
-
-    });
-    option2.addEventListener('click', () => {
-        changeBackgroundDependingOnStatus(option2);
-
-    });
-    option3.addEventListener('click', () => {
-        changeBackgroundDependingOnStatus(option3);
-
-    });
-    option4.addEventListener('click', () => {
-        changeBackgroundDependingOnStatus(option4);
-
-    });
-
+    
     select.add(option1, null)
     select.add(option2, null)
     select.add(option3, null)
     select.add(option4, null)
 
+    select.addEventListener('change', (e) =>{
+        changeBackgroundDependingOnStatus(select);
+    })
+    
 
 
     // Mirroring the dropdown selection from the form to after the card is created
@@ -265,7 +251,6 @@ function createRemoveButton(param) {
         for (let i = 0; i < localLibrary.length; i++) {
             let currDiv = localLibrary[i];
             if (currDiv.id === param.id) {
-                console.log(`This is the index of the book that you want to delete ${i}`);
                 localLibrary.splice(i, 1);
                 contentSection.removeChild(currDiv);
             }
